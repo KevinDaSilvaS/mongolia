@@ -1,5 +1,4 @@
 const joi = require('joi');
-const {token} = require('../../memory-manager/token');
 
 const authPostBody = joi.object({
     username: joi.string().required(),
@@ -7,7 +6,7 @@ const authPostBody = joi.object({
 });
 
 const authHeader = joi.object({
-    mongolia_auth_token: joi.string().equal(token).required()
+    mongolia_auth_token: joi.string().required()
 });
 
 module.exports = {authPostBody, authHeader};

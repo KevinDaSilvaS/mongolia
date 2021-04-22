@@ -5,6 +5,7 @@ const connection = require('./connection')
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express()
+const sanitized = require('../src/validations/models/ModelProperties');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
@@ -24,34 +25,39 @@ app.post('/auth', (req, res) => {
 })
 
 app.post('/tables', (req, res) => {
-    const {collectionName, collectionProperties} = req.body;
-    
-    let parsedCollectionProperties = JSON.stringify((collectionProperties)).replace(/"/g, '');
-    if(objCollections[collectionName]){
-        res.status(400).send('Table already exists')
-        return;
+    try {
+        const {collectionName, collectionProperties} = req.body;
+        const sanitizedFields = sanitized(collectionProperties);
+        
+        let parsedCollectionProperties = JSON.stringify((sanitizedFields)).replace(/"/g, '');
+        if(objCollections[collectionName]){
+            res.status(400).send('Table already exists')
+            return;
+        }
+            
+        const contentFile = `
+            const mongoose = require('mongoose');
+        
+            const ${collectionName}Schema = new mongoose.Schema(${parsedCollectionProperties});
+            
+            const ${collectionName}Model = mongoose.model("${collectionName}", ${collectionName}Schema);
+            
+            module.exports = ${collectionName}Model;
+        `;
+
+        fs.writeFile(`poc/models/${collectionName}Model.js`, contentFile, function (err) {
+            if (err) return console.log(err);
+                console.log('Hello World > helloworld.txt');
+        });
+        objCollections[collectionName] = `./models/${collectionName}Model.js`
+        console.log("PATH", objCollections[collectionName]);
+        fields[collectionName] = Object.keys(collectionProperties); 
+        //validateProperties(collectionProperties);
+
+        res.status(201).send('Hello World!')
+    } catch (error) {
+        res.status(500).send({error})
     }
-        
-    const contentFile = `
-        const mongoose = require('mongoose');
-    
-        const ${collectionName}Schema = new mongoose.Schema(${parsedCollectionProperties});
-        
-        const ${collectionName}Model = mongoose.model("${collectionName}", ${collectionName}Schema);
-        
-        module.exports = ${collectionName}Model;
-    `;
-
-    fs.writeFile(`poc/models/${collectionName}Model.js`, contentFile, function (err) {
-        if (err) return console.log(err);
-            console.log('Hello World > helloworld.txt');
-    });
-    objCollections[collectionName] = `./models/${collectionName}Model.js`
-    console.log("PATH", objCollections[collectionName]);
-    fields[collectionName] = Object.keys(collectionProperties); 
-    //validateProperties(collectionProperties);
-
-    res.status(201).send('Hello World!')
 })
 
 app.post('/tables/:tableName', async (req, res) => {

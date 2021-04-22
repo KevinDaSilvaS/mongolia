@@ -5,4 +5,8 @@ const authPostBody = joi.object({
     collectionProperties: joi.object().required()
 });
 
-module.exports = {authPostBody};
+const authHeader = joi.object({
+    mongolia_auth_token: joi.string().required()
+});
+
+module.exports = {authPostBody, authHeader};

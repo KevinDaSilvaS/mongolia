@@ -3,7 +3,7 @@ const routes = [
     {
         route: '/auth',
         validations: {},
-        controller: undefined,
+        controller: (req, res) => res.send({works: true}),
         method: 'POST'
     },
 
@@ -11,7 +11,7 @@ const routes = [
     {
         route: '/collections',
         validations: {},
-        controller: undefined, 
+        controller: (req, res) => res.send({works: true}), 
         method: 'POST'
     },
 
@@ -19,28 +19,28 @@ const routes = [
     {
         route: '/collections/:collectionName',
         validations: {},
-        controller: undefined, 
+        controller: (req, res) => res.send({works: true}), 
         method: 'POST'
     },
 
     {
         route: '/collections/:collectionName',
         validations: {},
-        controller: undefined, 
+        controller: (req, res) => res.send({works: true}), 
         method: 'GET'
     },
     
     {
         route: '/collections/:collectionName',
         validations: {},
-        controller: undefined, 
+        controller: (req, res) => res.send({works: true}), 
         method: 'PATCH'
     },
 
     {
         route: '/collections/:collectionName',
         validations: {},
-        controller: undefined, 
+        controller: (req, res) => res.send({works: true}), 
         method: 'DELETE'
     },
 ];

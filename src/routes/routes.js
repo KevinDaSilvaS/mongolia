@@ -1,4 +1,5 @@
 const validations = require('../validations/');
+const controllers = require('../controllers/');
 
 const routes = [
     //auth
@@ -7,7 +8,7 @@ const routes = [
         validations: {
             validateAuthPostBody: validations.validateAuthPostBody
         },
-        controller: (req, res) => res.send({works: true}),
+        controller: controllers.Authenticate,
         method: 'POST'
     },
 
@@ -28,7 +29,7 @@ const routes = [
         validations: {
             authToken: validations.validateAuthToken
         },
-        controller: (req, res) => res.send({works: true}), 
+        controller: controllers.Other, 
         method: 'POST'
     },
 

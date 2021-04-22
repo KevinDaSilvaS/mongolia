@@ -1,10 +1,10 @@
-import { v4 as uuidv4 } from 'uuid';
+const { v4: uuidv4 } = require('uuid');
 
 createToken = () => uuidv4();
 
 const credentials = {
-    username: undefined,
-    password: undefined,
+    username: "kevin",
+    password: "123",
     token: undefined,
     createToken
 }

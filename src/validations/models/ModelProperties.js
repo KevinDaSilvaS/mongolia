@@ -1,7 +1,6 @@
-const typeOptions = ["String", "Number", 
-              "Date", "Buffer", "Boolean", 
-              "Mixed", "ObjectId", "Array", 
-              "Decimal128", "Map", "Schema"];
+const typeOptions = require('../../constants/MongooseTypeOptions');
+
+const execute = (collectionProperties) => sanitizeFields(collectionProperties);
 
 const sanitizeFields = (collectionProperties) => {
     try {
@@ -61,4 +60,4 @@ const validateDefault = (defaultValue) => {
 
 }
 
-module.exports = sanitizeFields;
+module.exports = execute;

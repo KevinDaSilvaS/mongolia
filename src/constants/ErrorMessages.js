@@ -1,7 +1,6 @@
 module.exports = {
-    BOARD_NOT_FOUND: "Board not found.",
-    ERROR_UPDATE_BOARD: "Unable to update board.",
-    TASK_NOT_FOUND: "Task not found.",
-    ERROR_UPDATE_TASK: "Unable to update task.",
     ERROR_AUTHENTICATING: "Credentials dont match.",
+    AUTH_TOKEN_ALREADY_SET: "Auth token already set. To reset token restart mongolia.",
+    AUTH_TOKEN_NOT_PROPERLY_SET: "Auth token not properly set. Token doens't match.",
+    COLLECTION_ALREADY_EXISTS: "Collection already exists.",
 }

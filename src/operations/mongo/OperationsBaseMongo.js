@@ -8,7 +8,7 @@ class OperationsBaseMongo {
             const concrete = new this.model(data);
             return await concrete.save();
         } catch (error) {
-            return error;
+            throw error;
         }
     }
 
@@ -16,7 +16,7 @@ class OperationsBaseMongo {
         try {
             return await this.model.updateMany(query, replace);
         } catch (error) {
-            return error;
+            throw error;
         }
     }
 
@@ -24,7 +24,7 @@ class OperationsBaseMongo {
         try {
             return await this.model.findOne(query);
         } catch (error) {
-            return error;
+            throw error;
         }
     }
 
@@ -32,7 +32,7 @@ class OperationsBaseMongo {
         try {
             return await this.model.find(query);
         } catch (error) {
-            return error;
+            throw error;
         }
     }
 
@@ -40,7 +40,7 @@ class OperationsBaseMongo {
         try {
             return await this.model.deleteMany(query);
         } catch (error) {
-            return error;
+            throw error;
         }
     }
 
@@ -48,7 +48,7 @@ class OperationsBaseMongo {
         try {
             return await this.model.find(query).skip((page-1)*limit).limit(parseInt(limit));
         } catch (error) {
-            return error;
+            throw error;
         }
     }
 }

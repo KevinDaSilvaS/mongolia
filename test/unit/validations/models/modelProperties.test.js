@@ -11,7 +11,6 @@ const payload =  {
     }
 };
 
-
 describe('Sucess', () => {
     test('Should sanitize payload fields correctly', async () => {
        payload.nonRequiredNumberField.required = false;

@@ -17,7 +17,7 @@ const execute = async (req, res, dependencies) => {
 
         const filePath = GenerateModelFile({collectionName, 
                           collectionProperties: sanitizedFields, 
-                          path: `src/database/models`,
+                          path: `database/models`,
                           addressPath: `../../database/models`
                         });
 

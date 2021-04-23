@@ -6,9 +6,9 @@ const res = {
 };
 
 const req = {
-    query: {
-        limit: 1,
-        page : 1
+    body: {
+        collectionName: "any_collection_name",
+        collectionProperties: {}
     }
 }
 
@@ -16,35 +16,38 @@ describe('Sucess', () => {
     test('Should pass validations', () => {
         expect(validateCreateCollectionBody(req, res)).toEqual(true);
     });
-
-    test('Should pass validations with extra fields', () => {
-        req.headers.any_data = 'any_data';
-        expect(validateCreateCollectionBody(req, res)).toEqual(true);
-    });
 });
 
 describe('Fail', () => {
-    test('Should fail validations because of non positive limit', () => {
-        expect(validateCreateCollectionBody({query: {
-            limit: 0,
-        }}, res)).toEqual(false);
+
+    test('Should fail validations with extra fields', () => {
+        req.body.any_data = 'any_data';
+        expect(validateCreateCollectionBody(req, res)).toEqual(false);
+        delete req.body.any_data;
+    });
+
+    test('Should fail validations with a non string collectionName field', () => {
+        req.body.collectionName = true;
+        expect(validateCreateCollectionBody(req, res)).toEqual(false);
+        req.body.collectionName = "any_collection_name";
+    });
+
+    test('Should fail validations with a non object collectionProperties field', () => {
+        req.body.collectionProperties = true;
+        expect(validateCreateCollectionBody(req, res)).toEqual(false);
+        req.body.collectionProperties = {};
+    });
+
+    test('Should fail validations without a collectionName field', () => {
+        delete req.body.collectionName;
+        expect(validateCreateCollectionBody(req, res)).toEqual(false);
+        req.body.collectionName = "any_collection_name";
+    });
+
+    test('Should fail validations without a collectionProperties field', () => {
+        delete req.body.collectionProperties;
+        expect(validateCreateCollectionBody(req, res)).toEqual(false);
+        req.body.collectionProperties = {};
     });
     
-    test('Should fail validations because of non numeric limit', () => {
-        expect(validateCreateCollectionBody({query: {
-            limit: "abc",
-        }}, res)).toEqual(false);
-    });
-    
-    test('Should fail validations because of non positive page', () => {
-        expect(validateCreateCollectionBody({query: {
-            page: 0,
-        }}, res)).toEqual(false);
-    });
-    
-    test('Should fail validations because of non numeric page', () => {
-        expect(validateCreateCollectionBody({query: {
-            page: "abc",
-        }}, res)).toEqual(false);
-    });
 });

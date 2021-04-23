@@ -18,7 +18,7 @@ describe('Sucess', () => {
     });
 
     test('Should pass validations with extra fields', () => {
-        req.headers.any_data = 'any_data';
+        req.query.any_data = 'any_data';
         expect(validatePagination(req, res)).toEqual(true);
     });
 });

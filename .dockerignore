@@ -4,3 +4,4 @@ git
 docker-compose.yml
 Dockerfile
 poc
+coverage

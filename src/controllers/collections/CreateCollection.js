@@ -15,7 +15,7 @@ const execute = async (req, res, dependencies) => {
         if(collections[collectionName])
             return response(res, Status.BAD_REQUEST, ErrorMessages.COLLECTION_ALREADY_EXISTS);
 
-        const filePath = GenerateModelFile({collectionName, 
+        const filePath = await GenerateModelFile({collectionName, 
                           collectionProperties: sanitizedFields, 
                           path: `database/models`,
                           addressPath: `../../database/models`

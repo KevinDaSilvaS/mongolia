@@ -1,6 +1,8 @@
-fs = require('fs');
+const fs = require('fs');
+const util = require('util');
+const fs_writeFile = util.promisify(fs.writeFile);
 
-const createModelFile = ({collectionName, collectionProperties, path, addressPath}) => {
+const createModelFile = async ({collectionName, collectionProperties, path, addressPath}) => {
     let parsedCollectionProperties = JSON.stringify(collectionProperties).toString().replace(/"/g, '');
     const contentFile = `
         const mongoose = require('mongoose');
@@ -12,11 +14,12 @@ const createModelFile = ({collectionName, collectionProperties, path, addressPat
         module.exports = ${collectionName}Model;
     `;
 
-    fs.writeFile(`${path}/${collectionName}Model.js`, contentFile, function (err) {
-        if (err) throw err;
+    try {
+        await fs_writeFile(`${path}/${collectionName}Model.js`, contentFile);
         return `${addressPath}/${collectionName}Model.js`
-    });
-    return `${addressPath}/${collectionName}Model.js`
+    } catch (error) {
+        throw "No such file or directory.";
+    }
 }
 
 module.exports = createModelFile;

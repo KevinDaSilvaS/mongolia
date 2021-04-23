@@ -52,12 +52,4 @@ const validateRequired = (required) => {
     throw "Required not properly set. Accepted values(true, false)";
 }
 
-const validateDefault = (defaultValue) => {
-    if(!defaultValue)
-        return undefined
-
-    return defaultValue;
-
-}
-
 module.exports = execute;

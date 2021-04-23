@@ -29,7 +29,7 @@ const routes = [
         validations: {
             authToken: validations.validateAuthToken
         },
-        controller: controllers.Other, 
+        controller: controllers.InsertInCollection, 
         method: 'POST'
     },
 
@@ -39,7 +39,7 @@ const routes = [
             authToken: validations.validateAuthToken,
             pagination: validations.validatePagination
         },
-        controller: (req, res) => res.send({works: true}), 
+        controller: controllers.GetInCollection, 
         method: 'GET'
     },
     
@@ -48,7 +48,7 @@ const routes = [
         validations: {
             authToken: validations.validateAuthToken
         },
-        controller: (req, res) => res.send({works: true}), 
+        controller: controllers.UpdateInCollection, 
         method: 'PATCH'
     },
 
@@ -57,7 +57,7 @@ const routes = [
         validations: {
             authToken: validations.validateAuthToken
         },
-        controller: (req, res) => res.send({works: true}), 
+        controller: controllers.DeleteInCollection, 
         method: 'DELETE'
     },
 ];

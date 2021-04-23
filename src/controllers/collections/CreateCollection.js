@@ -6,16 +6,14 @@ const execute = async (req, res, dependencies) => {
 
     try {
         const {mongolia_auth_token} = req.headers;
-        if(token.token != mongolia_auth_token){
+        if(token.token != mongolia_auth_token)
             return response(res, Status.BAD_REQUEST, ErrorMessages.AUTH_TOKEN_NOT_PROPERLY_SET);
-        }
         
         const {collectionName, collectionProperties} = req.body;
         const sanitizedFields = modelProperties(collectionProperties);
 
-        if(collections[collectionName]){
+        if(collections[collectionName])
             return response(res, Status.BAD_REQUEST, ErrorMessages.COLLECTION_ALREADY_EXISTS);
-        }
 
         const filePath = GenerateModelFile({collectionName, 
                           collectionProperties: sanitizedFields, 

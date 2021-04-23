@@ -19,7 +19,7 @@ const routes = [
             authToken: validations.validateAuthToken,
             createCollectionPostBody: validations.validateCreateCollectionBody
         },
-        controller: (req, res) => res.send({works: true}), 
+        controller: controllers.CreateCollection, 
         method: 'POST'
     },
 

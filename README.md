@@ -1,4 +1,8 @@
  - [Welcome](https://github.com/KevinDaSilvaS/mongolia#welcome-to-mongolia)
+ - [Docs](https://github.com/KevinDaSilvaS/mongolia/blob/main/README.md#docs)
+ - 	- [Get started](https://github.com/KevinDaSilvaS/mongolia#getting-started)
+ - 	- [Run mongodb](https://github.com/KevinDaSilvaS/mongolia#-run-mongo-db-instance)
+ - 
 # Welcome to Mongolia!
 **Mongolia** is a rest interface / data gateway built in node js and inspired by tools like stargate(cassandra) and prest(postgres).
   **Application types where Mongolia can be really useful:**

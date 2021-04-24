@@ -38,7 +38,8 @@ const validateProperties = (fieldProperty) => {
 }
 
 const validateType = ({type}) => {
-    if(type && typeOptions.includes(type))
+    const rawType = type.replace(/\[/g, '').replace(/\]/g, '');
+    if(rawType && typeOptions.includes(rawType))
         return type
     throw `Type not properly set. Accepted values(${typeOptions.toString()})`;
 }

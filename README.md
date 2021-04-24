@@ -1,149 +1,149 @@
+ - [Welcome](https://github.com/KevinDaSilvaS/mongolia#welcome-to-mongolia)
 # Welcome to Mongolia!
-
 **Mongolia** is a rest interface / data gateway built in node js and inspired by tools like stargate(cassandra) and prest(postgres).
   **Application types where Mongolia can be really useful:**
-	 
-
  - Dockerized apps (mongolia has a docker image that can be easily composable).
- - Small apps or simple that dont need a backend with business rules only bson storage.
+ - Small apps or simple projects that dont need a backend with business rules only bson storage.
  - Programming languages that dont have a good mongo db driver. Or languages where the drivers are not well documented.
- - Fast prototiping without having to worry about backends in pocs.
+ - Fast prototiping without having to worry about database configuration and pocs.
 
 # DOCS
 
 Mongolia readme **docs!**
 
-## Create files and folders
+## Getting Started
 
-The file explorer is accessible using the button in left corner of the navigation bar. You can create a new file by clicking the **New file** button in the file explorer. You can also create folders by clicking the **New folder** button.
+### > Run mongo db instance:
+Using a default mongo db container  ``docker run -e MONGO_INITDB_ROOT_USERNAME=mongolia -e MONGO_INITDB_ROOT_PASSWORD=123 MONGO_INITDB_DATABASE=admin -p 27017:27017`` or by using a ``docker-compose up -d`` if you want to use the docker compose in the official project folder: [docker-compose mongo db](https://github.com/KevinDaSilvaS/mongolia/blob/main/docker-compose.yml)
 
-## Switch to another file
+### > Run mongolia container:
+Run mongolia image: ``docker run -e MONGO_USERNAME=mongolia 
+    -e MONGO_PASSWORD=123 
+    -e MONGODB_NAME=admin 
+    -e MONGODB_HOST=localhost 
+    -e MONGODB_PORT=27017 
+    -p 3170:3170 kevindasilvas/mongolia`` 
+    or if you used the docker compose from the official project:
+    ``docker run -e MONGO_USERNAME=mongolia
+    -e MONGO_PASSWORD=123 
+    -e MONGODB_NAME=admin 
+    -e MONGODB_HOST=mongolia_mongo_1 
+    -e MONGODB_PORT=27017 
+    -p 3170:3170 --net mongolia_default kevindasilvas/mongolia
+    ``
+### > Authenticating to Mongolia:
+Using a request manager like insomnia([we have a collection ready for insomnia](https://github.com/KevinDaSilvaS/mongolia/blob/main/collections/insomnia/mongolia_2021-04-23.json)), postman, curl or your own app if you want to, make a post request to``localhost:3170/auth `` , with a body conataining the mongo username and password ``{
+	"username": "mongolia",
+	"password": "123"
+}`` if successful mongolia will return a payload containing the http code and the auth token like this: ``{
+  "code": 201,
+  "details": {
+    "mongolia_auth_token": "b61fddb0-622a-4b56-8144-4b116aa480cf"
+  }
+}
+``
 
-All your files and folders are presented as a tree in the file explorer. You can switch from one to another by clicking a file in the tree.
+### > Creating a collection:
+Now that we have the mongolia_auth_token in hands, we will set it as a header in our request ``"mongolia_auth_token": "b61fddb0-622a-4b56-8144-4b116aa480cf"
+`` , we´ll set a body containing the collection name and the collection properties: ``{
+ "collectionName": "users",
+	"collectionProperties": {
+		"name": {
+			"type": "String",
+			"required":true
+		},
+		"age": {
+			"type": "Number"
+		}
+	}
+}
+``(more on collection properties and allowed types) and with our header and body set lets make a post request to``localhost:3170/collections``,if successful mongolia will return an 204 http code response.
 
-## Rename a file
+### > Inserting in collection:
+Set the``"mongolia_auth_token": "b61fddb0-622a-4b56-8144-4b116aa480cf" 
+``in headers again , and lets add a body to the request``{
+		"name": "kevin",
+		"age": 21
+}
+`` and execute a post request to``localhost:3170/collections/users``,if successful mongolia will return an 201 http code response with the repective body: ``{
+  "code": 201,
+  "details": {
+    "_id": "60843c79632f1dc33f3dbeaa",
+    "name": "kevin",
+    "age": 21,
+    "__v": 0
+  }
+}``.
 
-You can rename the current file by clicking the file name in the navigation bar or by clicking the **Rename** button in the file explorer.
+### > Get info in collection:
+Set the``"mongolia_auth_token": "b61fddb0-622a-4b56-8144-4b116aa480cf" 
+``in headers again , and lets set our GET url `` localhost:3170/collections/users?name=kevin``.You can add every collection field you set in collection properties + the default _id field in mongo to make your queries into mongo db (example:`` localhost:3170/collections/users?name=kevin&age=21&_id=random_mongo_id``), but lets run our query, if everything get well you will get a result like this: ``{
+  "code": 200,
+  "details": [{
+  "_id": "60843c79632f1dc33f3dbeaa",
+    "name": "kevin",
+    "age": 21,
+    "__v": 0
+  }]
+}``
 
-## Delete a file
+### > Update info in collection:
+Set the``"mongolia_auth_token": "b61fddb0-622a-4b56-8144-4b116aa480cf" 
+``in headers, set the body using the collection fields that you set in collectionProperties that you want to update  ``{
+		"name": "kevin updated this record"
+}
+`` and lets set our Path url `` localhost:3170/collections/users?name=kevin``. if everything went well you will get a response like this: ``{
+  "code": 200,
+  "details": {
+    "n": 1,
+    "nModified": 1,
+    "ok": 1
+  }
+}``
 
-You can delete the current file by clicking the **Remove** button in the file explorer. The file will be moved into the **Trash** folder and automatically deleted after 7 days of inactivity.
+### > Delete info in collection:
+The steps are basically the same in the get you set ``"mongolia_auth_token": "b61fddb0-622a-4b56-8144-4b116aa480cf" 
+``in headers and lets set our Path url `` localhost:3170/collections/users?name=kevin``. if everything went well you will get a response like this: ``{
+  "code": 200,
+  "details": {
+    "n": 1,
+    "ok": 1,
+    "deletedCount": 1
+  }
+}``
 
-## Export a file
+## Currently Supported Types
 
-You can export the current file by clicking **Export to disk** in the menu. You can choose to export the file as plain Markdown, as HTML using a Handlebars template or as a PDF.
+Mongolia currently supports the following mongo types: [``"String"``, ``"Number"``,
 
+``"Date"``, ``"Buffer"``, ``"Boolean"``,
 
-# Synchronization
+``"Mixed"``, ``"ObjectId"``, ``"Array"``,
 
-Synchronization is one of the biggest features of StackEdit. It enables you to synchronize any file in your workspace with other files stored in your **Google Drive**, your **Dropbox** and your **GitHub** accounts. This allows you to keep writing on other devices, collaborate with people you share the file with, integrate easily into your workflow... The synchronization mechanism takes place every minute in the background, downloading, merging, and uploading file modifications.
+``"Decimal128"``, ``"Map"``, ``"Schema"``]. And array combinations with all the above types:  [``"[String]"``, ``"[Number]"``,
 
-There are two types of synchronization and they can complement each other:
+``"[Date]"``, ``"[Buffer]"``, ``"[Boolean]"``,
 
-- The workspace synchronization will sync all your files, folders and settings automatically. This will allow you to fetch your workspace on any other device.
-	> To start syncing your workspace, just sign in with Google in the menu.
+``"[Mixed]"``, ``"[ObjectId]"``, ``"[Array]"``,
 
-- The file synchronization will keep one file of the workspace synced with one or multiple files in **Google Drive**, **Dropbox** or **GitHub**.
-	> Before starting to sync files, you must link an account in the **Synchronize** sub-menu.
+``"[Decimal128]"``, ``"[Map]"``, ``"[Schema]"``]
 
-## Open a file
+## Collection properties:
 
-You can open a file from **Google Drive**, **Dropbox** or **GitHub** by opening the **Synchronize** sub-menu and clicking **Open from**. Once opened in the workspace, any modification in the file will be automatically synced.
+Mongolia currenrly supports only the ``type``(supported types for this field) and the ``required``(true, false) properties
 
-## Save a file
+# Contribute
 
-You can save any file of the workspace to **Google Drive**, **Dropbox** or **GitHub** by opening the **Synchronize** sub-menu and clicking **Save on**. Even if a file in the workspace is already synced, you can save it to another location. StackEdit can sync one file with multiple locations and accounts.
+The mongolia project is always open for contributions, issues and Q&As.
+**The project will be more focused in the following topics:**
+> Adding CI/CD to create an automated docker image push to docker hub
+> Adding more collection properties like default value for example
+But these are just suggestions we always try to be very community oriented so feel free to contribute with your PR.
 
-## Synchronize a file
+# Use cases
 
-Once your file is linked to a synchronized location, StackEdit will periodically synchronize it by downloading/uploading any modification. A merge will be performed if necessary and conflicts will be resolved.
+Use cases where mongolia showed its value connecting applications and mongo db through rest.
 
-If you just have modified your file and you want to force syncing, click the **Synchronize now** button in the navigation bar.
-
-> **Note:** The **Synchronize now** button is disabled if you have no file to synchronize.
-
-## Manage file synchronization
-
-Since one file can be synced with multiple locations, you can list and manage synchronized locations by clicking **File synchronization** in the **Synchronize** sub-menu. This allows you to list and remove synchronized locations that are linked to your file.
-
-
-# Publication
-
-Publishing in StackEdit makes it simple for you to publish online your files. Once you're happy with a file, you can publish it to different hosting platforms like **Blogger**, **Dropbox**, **Gist**, **GitHub**, **Google Drive**, **WordPress** and **Zendesk**. With [Handlebars templates](http://handlebarsjs.com/), you have full control over what you export.
-
-> Before starting to publish, you must link an account in the **Publish** sub-menu.
-
-## Publish a File
-
-You can publish your file by opening the **Publish** sub-menu and by clicking **Publish to**. For some locations, you can choose between the following formats:
-
-- Markdown: publish the Markdown text on a website that can interpret it (**GitHub** for instance),
-- HTML: publish the file converted to HTML via a Handlebars template (on a blog for example).
-
-## Update a publication
-
-After publishing, StackEdit keeps your file linked to that publication which makes it easy for you to re-publish it. Once you have modified your file and you want to update your publication, click on the **Publish now** button in the navigation bar.
-
-> **Note:** The **Publish now** button is disabled if your file has not been published yet.
-
-## Manage file publication
-
-Since one file can be published to multiple locations, you can list and manage publish locations by clicking **File publication** in the **Publish** sub-menu. This allows you to list and remove publication locations that are linked to your file.
-
-
-# Markdown extensions
-
-StackEdit extends the standard Markdown syntax by adding extra **Markdown extensions**, providing you with some nice features.
-
-> **ProTip:** You can disable any **Markdown extension** in the **File properties** dialog.
-
-
-## SmartyPants
-
-SmartyPants converts ASCII punctuation characters into "smart" typographic punctuation HTML entities. For example:
-
-|                |ASCII                          |HTML                         |
-|----------------|-------------------------------|-----------------------------|
-|Single backticks|`'Isn't this fun?'`            |'Isn't this fun?'            |
-|Quotes          |`"Isn't this fun?"`            |"Isn't this fun?"            |
-|Dashes          |`-- is en-dash, --- is em-dash`|-- is en-dash, --- is em-dash|
-
-
-## KaTeX
-
-You can render LaTeX mathematical expressions using [KaTeX](https://khan.github.io/KaTeX/):
-
-The *Gamma function* satisfying $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$ is via the Euler integral
-
-$$
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
-$$
-
-> You can find more information about **LaTeX** mathematical expressions [here](http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference).
+> **ProTip:** More in the future.
 
 
-## UML diagrams
-
-You can render UML diagrams using [Mermaid](https://mermaidjs.github.io/). For example, this will produce a sequence diagram:
-
-```mermaid
-sequenceDiagram
-Alice ->> Bob: Hello Bob, how are you?
-Bob-->>John: How about you John?
-Bob--x Alice: I am good thanks!
-Bob-x John: I am good thanks!
-Note right of John: Bob thinks a long<br/>long time, so long<br/>that the text does<br/>not fit on a row.
-
-Bob-->Alice: Checking with John...
-Alice->John: Yes... John, how are you?
-```
-
-And this will produce a flow chart:
-
-```mermaid
-graph LR
-A[Square Rect] -- Link text --> B((Circle))
-A --> C(Round Rect)
-B --> D{Rhombus}
-C --> D
-```

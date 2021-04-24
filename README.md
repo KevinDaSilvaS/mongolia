@@ -2,7 +2,17 @@
  - [Docs](https://github.com/KevinDaSilvaS/mongolia/blob/main/README.md#docs)
  - 	- [Get started](https://github.com/KevinDaSilvaS/mongolia#getting-started)
  - 	- [Run mongodb](https://github.com/KevinDaSilvaS/mongolia#-run-mongo-db-instance)
- - 
+ - 	- [Run mongolia](https://github.com/KevinDaSilvaS/mongolia#-run-mongolia-container)
+ - 	- [Authenticating](https://github.com/KevinDaSilvaS/mongolia#-authenticating-to-mongolia)
+ - 	- [Creating collections](https://github.com/KevinDaSilvaS/mongolia#-creating-a-collection)
+ - 	- [Insertin in collections](https://github.com/KevinDaSilvaS/mongolia#-inserting-in-collection)
+ - 	- [Get registers](https://github.com/KevinDaSilvaS/mongolia#-get-info-in-collection)
+ - 	- [Update registes](https://github.com/KevinDaSilvaS/mongolia#-update-info-in-collection)
+ - 	- [Delete registers](https://github.com/KevinDaSilvaS/mongolia#-delete-info-in-collection)
+ - [Supported types](https://github.com/KevinDaSilvaS/mongolia#currently-supported-types)
+ - [Collection properties](https://github.com/KevinDaSilvaS/mongolia#collection-properties)
+ - [Contribute](https://github.com/KevinDaSilvaS/mongolia#contribute)
+ - [Use cases examples](https://github.com/KevinDaSilvaS/mongolia#use-cases)
 # Welcome to Mongolia!
 **Mongolia** is a rest interface / data gateway built in node js and inspired by tools like stargate(cassandra) and prest(postgres).
   **Application types where Mongolia can be really useful:**
@@ -61,7 +71,7 @@ Now that we have the mongolia_auth_token in hands, we will set it as a header in
 		}
 	}
 }
-``(more on collection properties and allowed types) and with our header and body set lets make a post request to``localhost:3170/collections``,if successful mongolia will return an 204 http code response.
+``(more on [collection properties](https://github.com/KevinDaSilvaS/mongolia#collection-properties) and [allowed types](https://github.com/KevinDaSilvaS/mongolia#currently-supported-types)) and with our header and body set lets make a post request to``localhost:3170/collections``,if successful mongolia will return an 204 http code response.
 
 ### > Inserting in collection:
 Set the``"mongolia_auth_token": "b61fddb0-622a-4b56-8144-4b116aa480cf" 
@@ -134,7 +144,7 @@ Mongolia currently supports the following mongo types: [``"String"``, ``"Number"
 
 ## Collection properties:
 
-Mongolia currenrly supports only the ``type``(supported types for this field) and the ``required``(true, false) properties
+Mongolia currenrly supports only the ``type``([supported types](https://github.com/KevinDaSilvaS/mongolia#currently-supported-types) for this field) and the ``required``(true, false) properties
 
 # Contribute
 

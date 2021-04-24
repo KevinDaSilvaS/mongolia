@@ -18,9 +18,9 @@ const execute = async (req, res, dependencies) => {
         const sanitizedQuery = validateQuery(req.query, collectionFields[collectionName]);
         const modelPath = require(collections[collectionName]);
         const operations = new Operations(modelPath);
-        await operations.update(sanitizedQuery, sanitizedFields);
+        const updatedInfo = await operations.update(sanitizedQuery, sanitizedFields);
         
-        return response(res, Status.NO_CONTENT, undefined);
+        return response(res, Status.OK, updatedInfo);
 
     } catch (error) {
         return response(res, Status.INTERNAL_SERVER_ERROR, error);

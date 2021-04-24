@@ -4,7 +4,7 @@ const execute = async (req, res, dependencies) => {
 
     try {
         if(token.token){
-            return response(res, Status.BAD_REQUEST, ErrorMessages.ERROR_AUTHENTICATING);
+            return response(res, Status.BAD_REQUEST, ErrorMessages.AUTH_TOKEN_ALREADY_SET);
         }
 
         const { username, password } = req.body;

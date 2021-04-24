@@ -2,7 +2,7 @@ const {modelProperties} = require('../../validations/models/');
 
 const execute = async (req, res, dependencies) => {
     const { response, manager, Status, ErrorMessages, GenerateModelFile } = dependencies;
-    const {token, collections} = manager;
+    const {token} = manager;
 
     try {
         const {mongolia_auth_token} = req.headers;

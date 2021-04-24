@@ -1,3 +1,5 @@
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
+ 
  - [Welcome](https://github.com/KevinDaSilvaS/mongolia#welcome-to-mongolia)
  - [Docs](https://github.com/KevinDaSilvaS/mongolia/blob/main/README.md#docs)
  - 	- [Get started](https://github.com/KevinDaSilvaS/mongolia#getting-started)

@@ -51,7 +51,7 @@ Run mongolia image: ``docker run -e MONGO_USERNAME=mongolia
     -p 3170:3170 --net mongolia_default kevindasilvas/mongolia
     ``
 ### > Authenticating to Mongolia:
-Using a request manager like insomnia([we have a collection ready for insomnia](https://github.com/KevinDaSilvaS/mongolia/blob/main/collections/insomnia/mongolia_2021-04-23.json)), postman, curl or your own app if you want to, make a post request to``localhost:3170/auth `` , with a body conataining the mongo username and password ``{
+Using a request manager like insomnia([we have a collection ready for insomnia](https://github.com/KevinDaSilvaS/mongolia/blob/main/collections/insomnia/mongolia_2021-04-23.json)), postman, curl or your own app if you want to, make a post request to``localhost:3170/auth `` , with a body containing the mongo username and password ``{
 	"username": "mongolia",
 	"password": "123"
 }`` if successful mongolia will return a payload containing the http code and the auth token like this: ``{

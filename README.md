@@ -9,7 +9,7 @@
  - 	- [Run mongolia](https://github.com/KevinDaSilvaS/mongolia#-run-mongolia-container)
  - 	- [Authenticating](https://github.com/KevinDaSilvaS/mongolia#-authenticating-to-mongolia)
  - 	- [Creating collections](https://github.com/KevinDaSilvaS/mongolia#-creating-a-collection)
- - 	- [Insertin in collections](https://github.com/KevinDaSilvaS/mongolia#-inserting-in-collection)
+ - 	- [Insert in collections](https://github.com/KevinDaSilvaS/mongolia#-inserting-in-collection)
  - 	- [Get registers](https://github.com/KevinDaSilvaS/mongolia#-get-info-in-collection)
  - 	- [Update registes](https://github.com/KevinDaSilvaS/mongolia#-update-info-in-collection)
  - 	- [Delete registers](https://github.com/KevinDaSilvaS/mongolia#-delete-info-in-collection)

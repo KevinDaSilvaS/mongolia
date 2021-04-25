@@ -16,6 +16,7 @@
  - [Supported types](https://github.com/KevinDaSilvaS/mongolia#currently-supported-types)
  - [Collection properties](https://github.com/KevinDaSilvaS/mongolia#collection-properties)
  - [Pagination](https://github.com/KevinDaSilvaS/mongolia#pagination)
+ - [Comparative Queries](https://github.com/KevinDaSilvaS/mongolia#comparitive-queries)
  - [Contribute](https://github.com/KevinDaSilvaS/mongolia#contribute)
  - [Use cases examples](https://github.com/KevinDaSilvaS/mongolia#use-cases)
 # Welcome to Mongolia!

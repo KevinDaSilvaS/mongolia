@@ -15,6 +15,7 @@
  - 	- [Delete registers](https://github.com/KevinDaSilvaS/mongolia#-delete-info-in-collection)
  - [Supported types](https://github.com/KevinDaSilvaS/mongolia#currently-supported-types)
  - [Collection properties](https://github.com/KevinDaSilvaS/mongolia#collection-properties)
+ - [Pagination](https://github.com/KevinDaSilvaS/mongolia#pagination)
  - [Contribute](https://github.com/KevinDaSilvaS/mongolia#contribute)
  - [Use cases examples](https://github.com/KevinDaSilvaS/mongolia#use-cases)
 # Welcome to Mongolia!
@@ -149,6 +150,10 @@ Mongolia currently supports the following mongo types: [``"String"``, ``"Number"
 ## Collection properties:
 
 Mongolia currenrly supports only the ``type``([supported types](https://github.com/KevinDaSilvaS/mongolia#currently-supported-types) for this field) and the ``required``(true, false) properties
+
+## Pagination:
+
+Mongolia in get registers in collection not only supports fields but also supports the ```?page=1``` and the ```&limit=10```,that you can customize to the amount of registers and pages do you need. Get example: `` localhost:3170/collections/users?name=kevin&page=2&limit=30``
 
 # Contribute
 

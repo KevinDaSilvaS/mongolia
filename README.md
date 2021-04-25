@@ -155,6 +155,10 @@ Mongolia currenrly supports only the ``type``([supported types](https://github.c
 
 Mongolia in get registers in collection not only supports fields but also supports the ```?page=1``` and the ```&limit=10```,that you can customize to the amount of registers and pages do you need. Get example: `` localhost:3170/collections/users?name=kevin&page=2&limit=30``
 
+## Comparitive Queries:
+
+Since Mongolia 1.2 we allow the users to make queries using the following mongo comparative attributes( ```GT - greater than, GTE - greater than equal, LT - less than, LTE - less than equal, EQ - equal```). Get example: `` localhost:3170/collections/users?name=kevin&age=@>GT18`` mongolia also allow combinations of comparative attributes, like: `` localhost:3170/collections/users?name=kevin&age=@>GT18@>LT35``
+
 # Contribute
 
 The mongolia project is always open for contributions, issues and Q&As.

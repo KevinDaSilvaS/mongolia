@@ -51,7 +51,7 @@ Run mongolia image: ``docker run -e MONGO_USERNAME=mongolia
     -e MONGODB_PORT=27017 
     -p 3170:3170 --net mongolia_default kevindasilvas/mongolia
     ``
-### > Authenticating to Mongolia:
+### > Authenticating to Mongolia (POST):
 Using a request manager like insomnia([we have a collection ready for insomnia](https://github.com/KevinDaSilvaS/mongolia/blob/main/collections/insomnia/mongolia_2021-04-23.json)), postman, curl or your own app if you want to, make a post request to``localhost:3170/auth `` , with a body containing the mongo username and password ``{
 	"username": "mongolia",
 	"password": "123"
@@ -63,7 +63,7 @@ Using a request manager like insomnia([we have a collection ready for insomnia](
 }
 ``
 
-### > Creating a collection:
+### > Creating a collection (POST):
 Now that we have the mongolia_auth_token in hands, we will set it as a header in our request ``"mongolia_auth_token": "b61fddb0-622a-4b56-8144-4b116aa480cf"
 `` , we´ll set a body containing the collection name and the collection properties: ``{
  "collectionName": "users",
@@ -79,7 +79,7 @@ Now that we have the mongolia_auth_token in hands, we will set it as a header in
 }
 ``(more on [collection properties](https://github.com/KevinDaSilvaS/mongolia#collection-properties) and [allowed types](https://github.com/KevinDaSilvaS/mongolia#currently-supported-types)) and with our header and body set lets make a post request to``localhost:3170/collections``,if successful mongolia will return an 204 http code response.
 
-### > Inserting in collection:
+### > Inserting in collection (POST):
 Set the``"mongolia_auth_token": "b61fddb0-622a-4b56-8144-4b116aa480cf" 
 ``in headers again , and lets add a body to the request``{
 		"name": "kevin",
@@ -95,7 +95,7 @@ Set the``"mongolia_auth_token": "b61fddb0-622a-4b56-8144-4b116aa480cf"
   }
 }``.
 
-### > Get info in collection:
+### > Get info in collection (GET):
 Set the``"mongolia_auth_token": "b61fddb0-622a-4b56-8144-4b116aa480cf" 
 ``in headers again , and lets set our GET url `` localhost:3170/collections/users?name=kevin``.You can add every collection field you set in collection properties + the default _id field in mongo to make your queries into mongo db (example:`` localhost:3170/collections/users?name=kevin&age=21&_id=random_mongo_id``), but lets run our query, if everything get well you will get a result like this: ``{
   "code": 200,
@@ -107,7 +107,7 @@ Set the``"mongolia_auth_token": "b61fddb0-622a-4b56-8144-4b116aa480cf"
   }]
 }``
 
-### > Update info in collection:
+### > Update info in collection (PATCH):
 Set the``"mongolia_auth_token": "b61fddb0-622a-4b56-8144-4b116aa480cf" 
 ``in headers, set the body using the collection fields that you set in collectionProperties that you want to update  ``{
 		"name": "kevin updated this record"
@@ -121,7 +121,7 @@ Set the``"mongolia_auth_token": "b61fddb0-622a-4b56-8144-4b116aa480cf"
   }
 }``
 
-### > Delete info in collection:
+### > Delete info in collection (DELETE):
 The steps are basically the same in the get you set ``"mongolia_auth_token": "b61fddb0-622a-4b56-8144-4b116aa480cf" 
 ``in headers and lets set our Path url `` localhost:3170/collections/users?name=kevin``. if everything went well you will get a response like this: ``{
   "code": 200,

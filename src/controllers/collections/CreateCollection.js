@@ -10,6 +10,10 @@ const execute = async (req, res, dependencies) => {
             return response(res, Status.BAD_REQUEST, ErrorMessages.AUTH_TOKEN_NOT_PROPERLY_SET);
         
         const {collectionName, collectionProperties} = req.body;
+
+        if(manager.collections[collectionName])
+            return response(res, Status.BAD_REQUEST, ErrorMessages.COLLECTION_ALREADY_EXISTS);
+
         const sanitizedFields = modelProperties(collectionProperties);
 
         const filePath = await GenerateModelFile({collectionName, 

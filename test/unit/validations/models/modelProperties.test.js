@@ -4,17 +4,19 @@ const typeOptions = require('../../../../src/constants/MongooseTypeOptions');
 const payload =  {
     requiredStringField: {
         type: "String",
-        required:true
+        required: true,
+        unique: true
     },
-        nonRequiredNumberField: {
+    nonRequiredNumberField: {
         type: "Number"
     }
 };
 
 describe('Sucess', () => {
     test('Should sanitize payload fields correctly', async () => {
-       payload.nonRequiredNumberField.required = false;
        const sanitizedFields = execute(payload);
+       payload.nonRequiredNumberField.required = false;
+       payload.nonRequiredNumberField.unique = false;
 
        expect(sanitizedFields).toEqual(payload);
     });
@@ -40,4 +42,15 @@ describe('Fail', () => {
         }
         
      });
+ 
+     test('Should throw error because of not allowed unique property value', async () => {
+         delete payload.nonRequiredNumberField.required;
+         payload.nonRequiredNumberField.unique = 'not_bool';
+         try {
+             execute(payload);
+         } catch (error) {
+             expect(error).toEqual("Unique not properly set. Accepted values(true, false)");
+         }
+         
+      });
 });

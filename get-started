@@ -4,3 +4,5 @@
     -e MONGODB_HOST=mongolia_mongo_1 
     -e MONGODB_PORT=27017 
     -p 3170:3170 --net mongolia_default mongolia
+
+docker run -e MONGO_USERNAME=kevin -e MONGO_PASSWORD=123 -e MONGODB_NAME=admin -e MONGODB_HOST=mongolia_mongo_1 -e MONGODB_PORT=27017 -p 3170:3170 --net mongolia_default mongolia

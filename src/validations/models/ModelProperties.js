@@ -25,10 +25,12 @@ const validateProperties = (fieldProperty) => {
     try {
         const type = validateType(fieldProperty);
         const required = validateRequired(fieldProperty['required']);
+        const unique = validateUnique(fieldProperty['unique']);
 
         const properties = {
             type,
             required,
+            unique
         }
         return properties;
 
@@ -51,6 +53,15 @@ const validateRequired = (required) => {
     if(typeof required == typeof false)
         return required
     throw "Required not properly set. Accepted values(true, false)";
+}
+
+const validateUnique = (unique) => {
+    if(!unique)
+        return false
+
+    if(typeof unique == typeof false)
+        return unique
+    throw "Unique not properly set. Accepted values(true, false)";
 }
 
 module.exports = execute;

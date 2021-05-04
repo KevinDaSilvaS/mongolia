@@ -150,7 +150,7 @@ Mongolia currently supports the following mongo types: [``"String"``, ``"Number"
 
 ## Collection properties:
 
-Mongolia currenrly supports only the ``type``([supported types](https://github.com/KevinDaSilvaS/mongolia#currently-supported-types) for this field) and the ``required``(true, false) properties
+Mongolia currenrly supports the ``type``([supported types](https://github.com/KevinDaSilvaS/mongolia#currently-supported-types) for this field), ``required``(true, false) and the ``unique``(true, false) properties
 
 ## Pagination:
 
@@ -164,7 +164,6 @@ Since Mongolia 1.2 we allow the users to make queries using the following mongo 
 
 The mongolia project is always open for contributions, issues and Q&As.
 **The project will be more focused in the following topics:**
-> Adding CI/CD to create an automated docker image push to docker hub
 > Adding more collection properties like default value for example
 But these are just suggestions we always try to be very community oriented so feel free to contribute with your PR.
 

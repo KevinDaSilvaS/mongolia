@@ -35,32 +35,32 @@ const validateProperties = (fieldProperty) => {
         return properties;
 
     } catch (error) {
-        throw error
+        throw error;
     }
 }
 
 const validateType = ({type}) => {
     const rawType = type.replace(/\[/g, '').replace(/\]/g, '');
     if(rawType && typeOptions.includes(rawType))
-        return type
+        return type;
     throw `Type not properly set. Accepted values(${typeOptions.toString()})`;
 }
 
 const validateRequired = (required) => {
     if(!required)
-        return false
+        return false;
 
     if(typeof required == typeof false)
-        return required
+        return required;
     throw "Required not properly set. Accepted values(true, false)";
 }
 
 const validateUnique = (unique) => {
     if(!unique)
-        return false
+        return false;
 
     if(typeof unique == typeof false)
-        return unique
+        return unique;
     throw "Unique not properly set. Accepted values(true, false)";
 }
 

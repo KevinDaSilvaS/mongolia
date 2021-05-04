@@ -4,8 +4,6 @@ sanitizeQuery = (value, property) => {
 }
 
 const buildComparativeQuery = (fieldValue) => {
-
-    console.log(fieldValue)
     const queryElems = fieldValue.split("@>");
     const finalValue = {};
     queryElems.map((elem) => {

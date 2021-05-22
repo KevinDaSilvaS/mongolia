@@ -132,6 +132,9 @@ The steps are basically the same in the get you set ``"mongolia_auth_token": "b6
   }
 }``
 
+## More Examples
+- [Get started (medium article)](https://kevin-da-silva.medium.com/lets-talk-about-mongolia-mongo-db-as-a-rest-api-d5d5f8a3f885)
+
 ## Currently Supported Types
 
 Mongolia currently supports the following mongo types: [``"String"``, ``"Number"``,

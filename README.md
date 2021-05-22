@@ -13,6 +13,7 @@
  - 	- [Get registers](https://github.com/KevinDaSilvaS/mongolia#-get-info-in-collection)
  - 	- [Update registes](https://github.com/KevinDaSilvaS/mongolia#-update-info-in-collection)
  - 	- [Delete registers](https://github.com/KevinDaSilvaS/mongolia#-delete-info-in-collection)
+ - [More examples and resources](https://github.com/KevinDaSilvaS/mongolia#more-examples)
  - [Supported types](https://github.com/KevinDaSilvaS/mongolia#currently-supported-types)
  - [Collection properties](https://github.com/KevinDaSilvaS/mongolia#collection-properties)
  - [Pagination](https://github.com/KevinDaSilvaS/mongolia#pagination)

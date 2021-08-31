@@ -154,7 +154,7 @@ Mongolia currently supports the following mongo types: [``"String"``, ``"Number"
 
 ## Collection properties:
 
-Mongolia currenrly supports the ``type``([supported types](https://github.com/KevinDaSilvaS/mongolia#currently-supported-types) for this field), ``required``(true, false) and the ``unique``(true, false) properties
+Mongolia currently supports the ``type``([supported types](https://github.com/KevinDaSilvaS/mongolia#currently-supported-types) for this field), ``required``(true, false) and the ``unique``(true, false) properties
 
 ## Pagination:
 
